@@ -2,8 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Book List</title>
+    <title>Bookstore</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +11,47 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <style>
-    .card {
+        body {
+            background: white;
+        }
+        .container-fluid {
+            padding: 100px;
+            padding-top: 50px;
+            align: center;
+        }
+        .navbar {
+            padding: 50px;
+            background: RebeccaPurple;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 2.5rem;
+            color: #f2f2f2;
+            text-decoration: none;
+        }
+        .navbar-brand:hover {
+            background-color: transparent;
+            color: #f2f2f2;
+        }
+        .search-wrapper {
+            padding: 30px;
+            text-align: center;
+        }
+        .search {
+            background-color: #f1f1f1;
+            border: none;
+            width: 400px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        .search:focus {
+            outline: none;
+            border: 1px solid #ccc;
+        }
+        .card {
             margin: 30px;
             border-radius: 8px;
             text-align: center;
@@ -44,38 +83,138 @@
             margin-top: 8px;
             padding: 5px;
         }
-        </style>
+        .text-primary {
+            font-size: 14px;
+            margin-top: 8px;
+            padding: 5px;
+        }
+        .text-danger {
+            font-size: 14px;
+            margin-top: 8px;
+            padding: 5px;
+        }
+        .header-link {
+            margin: 0 10px;
+            padding: 5px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #f2f2f2;
+            font-size: 12px;
+            transition: background-color 0.3s ease;
+        }
+        .user-icon {
+            margin-right: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            color: #f2f2f2;
+            transition: background-color 0.3s ease;
+        }
+        .user-icon:hover {
+            border-radius: 30%;
+            background-color: #f2f2f2;
+            color: #000;
+            text-decoration: None;
+        }
+        .dropdown {
+            border: none;
+        }
+        .dropdown:hover {
+            border: none;
+        }
+        .dropdown-menu {
+            position: absolute;
+            left: 0;
+            right: auto;
+            transform: translateX(-50%);
+            background: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            padding: 0.5rem;
+            border-radius: 15px;
+        }
+        .dropdown-item {
+            color: #333;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .dropdown-item:hover {
+            background-color: RebeccaPurple;
+            border-radius: 10px;
+            color: white;
+        }
+        .dropdown-divider {
+            margin: 0.5rem 0;
+            border-top: 1px solid #ccc;
+        }
+        .card-link {
+            padding: 3px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        .card-link:hover {
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: None;
+        }
+        .site-footer {
+            background-color: #f8f8f8;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .site-footer p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+        @media (max-width: 767px) {
+            .container-fluid {
+                padding: 80px;
+            }
+            .search {
+                width: 200px;
+                margin-bottom: 10px;
+            }
+            .bi-search {
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 {% block content %}
-
 <body>
-<div class="row">
-  {% for each in object_list %}
-    <div class="col">
-        <div class="card-body" style="width: 13rem; ">
-            <img src="{{ each.image_urls }}" class = "card-img-top" alt=".." height="300px" width="100px">
-            <div class="card-body">
-                <h5 class="card-title">{{ each.title}}</h5>
-                <p class="card-text">RS/-:{{each.price|floatformat:2}}</p>
-                {% if each.book_available is True %}
-                <li class="text-primary">Available</li>
-                {% else %}
-                <li class="text-danger">Out of Stock!</li>
-                {% endif %}
-                <a href="{% url 'detail-view' each.id%}" class="btn btn-primary">View</a>
-                <a href="{% url 'add_to_cart' each.id%}" class="btn btn-primary">Add To Cart</a>
 
-
-
-
+    <div class="container-fluid">
+        <div class="row">
+            {% for each in object_list %}
+            <div class="col-sm-3 d-flex align-items-stretch">
+                <div class="card" style="width: 200px;">
+                     <img src ="{{ each.image_urls }}" class = "card-img-top" alt=".." style=""></a>
+                    <div class="body">
+                        <h5 class="card-title">{{ each.title }}</h5>
+                        <p class="card-text">{{ each.price|floatformat:2 }}</p>
+                        {% if each.book_available is True %}
+                            <p class="text-success"><strong>Available</strong></p>
+                        {% else %}
+                            <p class="text-danger"><strong>Out of stock!</strong></p>
+                        {% endif %}
+                        <a href="{% url 'detail-view' each.id%}" class="btn btn-primary">View</a>
+                        <a href="{% url 'add_to_cart' each.id%}" class="btn btn-primary">Add To Cart</a>
+                    </div>
+                </div>
             </div>
-
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
-
-
-</div>
+<center>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2023 Mubashira. All rights reserved.</p>
+        </div>
+    </footer>
+</center>
 
 </body>
 {% endblock content %}

@@ -236,8 +236,7 @@ form.example::after {
               <div class="dropdown-menu">
               {% if user.is_authenticated %}
               <a class="dropdown-item" href="{% url 'mycart' %}">My Cart</a>
-                  <li><a class="dropdown-item" href="{% url 'myprofile' %}">My Profile</a></li>
-                <li><a style="background: linear-gradient(to right, #ff0000, #0000ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" class="dropdown-item" href="{% url 'book_recommendations' 'fiction' %}">Exclusive</a></li>
+                  <li><a  class="dropdown-item" href="{% url 'myprofile'  %}">My Profile</a></li>
                   <a class="dropdown-item" href="{% url 'orders' %}">My Orders</a>
                   <li><a class="dropdown-item" href="{% url 'home' %}">Home</a></li>
 

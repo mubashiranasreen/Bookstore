@@ -147,7 +147,7 @@ def add_to_cart(request, book_id):
         cart_item.save()
     cart_obj.total_price += Decimal(str(book.price))
     cart_obj.save()
-    return redirect('mycart')
+    return redirect('cart/mycart.html')
 
 
 @login_required
@@ -166,7 +166,7 @@ def remove_from_cart(request, book_id):
                 cart_item.delete()
             cart_obj.total_price -= Decimal(str(book.price))
             cart_obj.save()
-    return redirect('mycart')
+    return redirect('cart/mycart.html')
 
 
 def book_recommendations(request, query):

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>reads.com</title>
+    <title>Bookstore</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +30,7 @@
         }
         .navbar {
             padding: 18px;
-            background: RebeccaPurple;
+            background: DarkCyan;
         }
         .navbar-brand {
             font-weight: bold;
@@ -218,7 +218,7 @@
 <body>
     <nav class="navbar">
         <p class="navbar-brand">
-            Reads.com
+            Bookstore
         </p>
         <div class="ml-auto">
             <a class="header-link" href="{% url 'list' %}">Go Back</a>
@@ -253,7 +253,7 @@
                         {% for book in profile.favorites.all|slice:":4" %}
                             <div class="col-sm-6 img-container">
                                 <div class="card">
-                                    <img class="fav-img" src ="{{ book.image_url }}" style="width: 100%; height: 160px;">
+                                    <img class="fav-img" src ="{{ book.image_urls }}" style="width: 100%; height: 160px;">
                                     <div class="book-name">
                                         {{ book.title }}
                                     </div>
